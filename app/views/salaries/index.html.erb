@@ -1,0 +1,31 @@
+<div class="flex justify-center bg-white shadow-lg rounded-lg w-full">
+  
+  <div class="p-6">
+    <div class="flex justify-center items-center">
+    <h1 class="text-3xl font-bold text-center my-6 col-span-5 mr-4">Список выплат</h1>
+    </div>
+    <div class="gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid grid-cols-1">
+    <% @salaries.each do |salary| %>
+    <%= link_to salary_path(salary)  do %>
+      <div class="flex p-4 rounded-lg mb-2 shadow-md hover:bg-green-200">
+        <div class="w-full flex flex-col">
+        <div>Фамилия: <%= salary.driver.lastname %></div>
+        <div>Имя: <%= salary.driver.name %></div>
+        <div>Отчество: <%= salary.driver.patronymic %></div>
+        <div>Водительское удостоверение: <%= salary.driver.dr_license %></div>
+
+        <div class="font-bold">Дата выплаты: <%= salary.salary_date %></div>
+        <div>Стоимость километра:<%= number_to_currency(salary.km_rate, unit: '₽', format: "%n %u") %></div>
+        <div>Киллометраж:<%= number_to_currency(salary.reis, unit: '₽', format: "%n %u") %></div>
+        <div>Сумма командировочных:<%= number_to_currency(salary.travel_allow, unit: '₽', format: "%n %u") %></div>
+        <div>Сумма простоя: <%= number_to_currency(salary.downtime, unit: '₽', format: "%n %u") %></div>
+        <div>Премия: <%= number_to_currency(salary.premium, unit: '₽', format: "%n %u") %></div>
+        <div class="font-bold">Сумма выплаты: <%= number_to_currency(salary.km_rate * salary.reis + salary.travel_allow + salary.downtime + salary.premium, unit: '₽', format: "%n %u") %></div>
+        </div>
+      </div>
+    <% end %>  
+    <% end %>
+    </div>
+  </div>
+</div>
+

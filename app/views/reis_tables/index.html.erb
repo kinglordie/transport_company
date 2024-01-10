@@ -1,0 +1,40 @@
+<div class="flex justify-center bg-white shadow-lg rounded-lg w-full">
+  <div class="p-6">
+    <div class="flex justify-center items-center">
+    <h1 class="text-3xl font-bold text-center my-6 col-span-5 mr-4">Список Рейсов</h1>
+    <%= link_to new_reis_table_path, class: 'flex items-center justify-center h-12 w-12 bg-green-500 hover:bg-green-700 text-white rounded-full shadow-lg' do %>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+      </svg>
+    <% end %>
+    </div>
+    <div class="gap-4 sm:grid-cols-3 md:grid-cols-4 grid grid-cols-1">
+    <% @reis_tables.each_with_index do |reis, index| %>
+    <%= link_to reis_table_path(reis)  do %>
+      <div class="<%= index.even? ? 'bg-white' : 'bg-green-100' %> hover:bg-green-200 p-4 rounded-lg mb-2 shadow-md">
+        <div class="text-lg font-semibold mb-2">Контрагент: <%= reis.counterparty.name %></div>
+        <div class="text-lg font-semibold mb-2">Водитель: <%= reis.driver.lastname %> <%= reis.driver.name %></div>
+        <div class="text-lg font-semibold mb-2">Грузовик: <%= reis.truck.car_number %></div>
+        <div class="text-lg font-semibold mb-2">Прицеп: <%= reis.trailer.car_number %></div>
+        <div>Место загрузки: <%= reis.loading %></div>
+        <div>Место разгрузки: <%= reis.unloading %></div>
+        <div>Дата загрузки: <%= reis.date_load %></div>
+        <div>Дата разгрузки: <%= reis.date_unload %></div>
+        <div>Наименование груза: <%= reis.cargo_name %></div>
+        <div>Километраж: <%= reis.km %></div>
+        <div>Ставка за тонну груза: <%= reis.rate %></div>
+        <div>Количество груза: <%= reis.tonnage %></div>
+        <div>Наличие налога: <%= reis.nds %></div>
+        <div>Стоимость рейса: <%= reis.sum %></div>
+        <div>Срок оплаты: <%= reis.due_date %></div>
+        <div>Дата выставления счета: <%= reis.invoice_date %></div>
+        <div>Дата отправки письма: <%= reis.letter_date %></div>
+        <div>Крайний срок оплаты: <%= reis.deadline %></div>
+        <div>Статус: <%= reis.status %></div>
+        <div>Номер отслеживания: <%= reis.tracking_number %></div>
+      </div>
+      <%end%>
+    <% end %>
+    </div>
+  </div>
+</div>

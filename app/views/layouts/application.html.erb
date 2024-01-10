@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TransportCompany</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <%= javascript_importmap_tags %>
+    <%= favicon_link_tag 'favicon.png' %>
+  </head>
+
+  <body style="">
+  <div class="flex w-full">
+    <% if user_signed_in? %>
+      <%= render 'layouts/sidebar' %>
+    <% end %>
+    <%= yield %>
+  </div>
+  </body>
+</html>

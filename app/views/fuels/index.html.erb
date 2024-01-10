@@ -1,0 +1,18 @@
+<div class="flex justify-center bg-white shadow-lg rounded-lg w-full">
+  <div class="p-6">
+    <h1 class="text-3xl font-bold text-center my-6 col-span-5">Список Заправок</h1>
+    <div class="gap-4 sm:grid-cols-3 md:grid-cols-4 grid grid-cols-1">
+    <% @fuels.each_with_index do |fuel, index| %>
+      <div class="<%= index.even? ? 'bg-white' : 'bg-green-100' %> p-4 rounded-lg mb-2 shadow-md">
+        <div class="text-lg font-semibold mb-2">Дата заправки: <%= fuel.date.strftime('%Y-%m-%d') %></div>
+        <div>Номер грузовика: <%= fuel.truck.car_number %></div>
+        <div>Модель грузовика: <%= fuel.truck.model %></div>
+        <div>Марка топлива: <%= fuel.type_f %></div>
+        <div>Заправлено (Л): <%= fuel.fuel_l %></div>
+        <div>Стоимость литра: <%= fuel.price %></div>
+        <div class="font-semibold mt-2">Итоговая сумма: <%= number_to_currency(fuel.fuel_l * fuel.price, unit: '₽', format: "%n %u") %></div>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>

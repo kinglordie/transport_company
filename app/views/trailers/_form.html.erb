@@ -1,0 +1,73 @@
+<div class="flex items-center justify-center w-full min-h-screen">
+  <div class="flex -mx-2 shadow-lg">
+  <div class="w-full max-w-lg hidden sm:flex">
+      <% if trailer.photo.attached? %>
+        <%= image_tag trailer.photo, class: "object-cover rounded-l" %>
+      <% end %>
+  </div>
+  <div class="w-full max-w-md bg-white rounded-r px-12 pt-6 pb-8">
+  <% if @trailer.new_record? %>
+      <h2 class="text-2xl font-bold text-left text-gray-700 mb-4">Новый прицеп</h2>  
+  <% else %>
+      <h2 class="text-2xl font-bold text-left text-gray-700 mb-4"><%= @trailer.model %> <%= @trailer.car_number %> </h2>
+  <% end %>
+<%= form_with(model: trailer, local: true, class: "flex flex-col gap-y-4") do |form| %>
+    <% if trailer.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(trailer.errors.count, "error") %> запрещено эту форму сохранить:</h2>
+  
+        <ul>
+          <% trailer.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <% if !@trailer.new_record? %>
+    <div class="flex ">
+    <%= link_to new_trailer_repair_path(trailer_id: @trailer.id), class: 'mr-4 flex items-center justify-center hover:bg-green-700 h-12 w-12 bg-green-500 text-white rounded-full shadow-lg' do %>
+      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path fill="#FFFFFF" d="M756-120 537-339l84-84 219 219-84 84Zm-552 0-84-84 276-276-68-68-28 28-51-51v82l-28 28-121-121 28-28h82l-50-50 142-142q20-20 43-29t47-9q24 0 47 9t43 29l-92 92 50 50-28 28 68 68 90-90q-4-11-6.5-23t-2.5-24q0-59 40.5-99.5T701-841q15 0 28.5 3t27.5 9l-99 99 72 72 99-99q7 14 9.5 27.5T841-701q0 59-40.5 99.5T701-561q-12 0-24-2t-23-7L204-120Z"/></svg>
+    <% end %>
+    </div>
+    <% end %>    
+    <div class="field">
+      <%= form.label :car_number,"Номер грузовика", class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.text_field :car_number, class: "w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500" %>
+    </div>
+    <div class="field">
+      <%= form.label :photo %>
+      <%= form.file_field :photo %>
+    </div>
+    <div class="field">
+    <%= form.label :model,"Модель", class: "block text-gray-700 text-sm font-bold mb-2"  %>
+    <%= form.text_field :model, class: "w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500"  %>
+    </div>
+    <div class="field">
+    <%= form.label :year,"Год выпуска", class: "block text-gray-700 text-sm font-bold mb-2"  %>
+    <%= form.text_field :year, class: "w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500"   %>
+    </div>
+    <div class="field">
+    <%= form.label :VIN,"VIN", class: "block text-gray-700 text-sm font-bold mb-2"   %>
+    <%= form.text_field :VIN, class: "w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500"   %>
+    </div>
+    <div class="field">
+    <%= form.label :STS,"СТС", class: "block text-gray-700 text-sm font-bold mb-2"   %>
+    <%= form.text_field :STS, class: "w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500"   %>
+    </div>
+    <div class="field">
+      <%= form.label :status, "Статус", class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.select :status, Trailer.statuses.keys.map { |key| [Trailer.statuses[key].titleize, key] }, {}, { class: "w-full shadow border rounded py-2 pr-8 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500" } %>
+    </div>
+  
+    <div class="actions" >
+      <% if @trailer.new_record? %>
+        <%= form.submit "Создать прицеп", class: "w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500" %>
+      <% else %>
+        <%= form.submit "Обновить информацию", class: "w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500" %>
+      <% end %>
+    </div>
+  <% end %>
+    </div>
+    
+  </div>
+</div>

@@ -1,0 +1,24 @@
+
+<div class="flex flex-col items-center bg-white shadow-lg rounded-lg w-full">
+  <div class="flex flex-col items-center p-6">
+    <img class="w-48 h-48 rounded-full" src="<%= image_path('register_page_image.png') %>" alt="Profile picture">
+    <h1 class="text-2xl font-bold mt-4">Профиль пользователя</h1>
+    <div class="text-center mt-6">
+      <p class="text-gray-700 text-lg"><strong>Фамилия:</strong> <%= @user.lastname %></p>
+      <p class="text-gray-700 text-lg"><strong>Имя:</strong> <%= @user.name %></p>
+      <p class="text-gray-700 text-lg"><strong>Отчество:</strong> <%= @user.patronymic %></p>
+      <p class="text-gray-700 text-lg"><strong>Почта:</strong> <%= @user.email %></p>
+      <p class="text-gray-700 text-lg"><strong>Роль:</strong> <%= @user.role %></p>
+    </div>
+    <div class="mt-6">
+      <%= link_to 'Редактировать профиль', edit_user_registration_path, class: "text-white bg-blue-500 hover:bg-blue-700 rounded-md px-4 py-2 text-lg" %>
+    </div>
+    <div class="mt-4">
+      <%= form_with url: destroy_user_session_path, method: :delete do %>
+        <%= submit_tag 'Выйти', class: "text-white bg-red-500 hover:bg-red-700 rounded-md px-8 py-2 text-lg" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+

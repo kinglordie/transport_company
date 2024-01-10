@@ -1,0 +1,31 @@
+<div class="flex items-center justify-center w-full min-h-screen">
+  <div class="flex -mx-2 shadow-lg">
+  <div class="w-full max-w-lg hidden sm:flex">
+      <img src="/assets/STO.png" alt="Transportation Image" class="object-cover rounded-l ">
+  </div>
+  <div class="w-full max-w-md bg-white rounded-r px-12 pt-6 pb-8">
+  <h2 class="text-2xl font-bold text-left text-gray-700 mb-4">Сведения о ремонте</h2>
+  <%= form_with(model: truck_repair, local: true, class: "flex flex-col gap-y-4") do |form| %>
+    <% if params[:truck_id] %>
+      <%= form.hidden_field :truck_id, value: params[:truck_id] %>
+    <% end %>
+    <div class="field">
+      <%= form.label :date_repair,"Дата ремонта", class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.date_field :date_repair, class: "shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500" %>
+    </div>
+    <div class="field">
+      <%= form.label :part_name, "Название запчасти", class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.text_field :part_name, class: "shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500" %>
+    </div>
+    <div class="field">
+      <%= form.label :price, "Стоимость", class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.text_field :price, class: "shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500" %>
+    </div>
+    <div class="actions">
+      <%= form.submit "Добавить ремонт", class: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500" %>
+    </div>
+  <% end %>
+  </div>
+    
+  </div>
+</div>

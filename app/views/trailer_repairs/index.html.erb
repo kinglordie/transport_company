@@ -1,0 +1,16 @@
+<div class="flex justify-center bg-white shadow-lg rounded-lg w-full">
+  <div class="p-6">
+    <h1 class="text-3xl font-bold text-center my-6 col-span-5">Список Ремонтов</h1>
+    <div class="gap-4 sm:grid-cols-3 md:grid-cols-4 grid grid-cols-1">
+    <% @trailer_repairs.each_with_index do |repair, index| %>
+      <div class="<%= index.even? ? 'bg-white' : 'bg-green-100' %> p-4 rounded-lg mb-2 shadow-md">
+        <div class="text-lg font-semibold mb-2">Дата ремонта: <%= repair.date_repair.strftime('%Y-%m-%d') %></div>
+        <div>Номер прицепа: <%= repair.trailer.car_number %></div>
+        <div>Модель прицепа: <%= repair.trailer.model %></div>
+        <div>Название запчасти: <%= repair.part_name %></div>
+        <div>Стоимость: <%= repair.price %></div>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>

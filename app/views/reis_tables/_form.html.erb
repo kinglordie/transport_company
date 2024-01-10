@@ -1,0 +1,113 @@
+<div class="flex items-center justify-center w-full min-h-screen">
+  <div class="flex -mx-2 shadow-lg">
+  <div class="w-full max-w-md bg-white rounded-r px-12 pt-6 pb-8">
+  <% if @reis_table.new_record? %>
+      <h2 class="text-2xl font-bold text-left text-gray-700 mb-4">Новый рейс</h2>  
+  <% else %>
+      <h2 class="text-2xl font-bold text-left text-gray-700 mb-4">Информация о рейсе </h2>
+  <% end %>
+<%= form_with(model: reis_table, local: true, class: "grid grid-cols-2 gap-4") do |form| %>
+    <% if reis_table.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(reis_table.errors.count, "error") %> запрещено эту форму сохранить:</h2>
+  
+        <ul>
+          <% reis_table.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="field">
+      <%= form.label :lastname,"Контрагент", class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.collection_select :counterparty_id, Counterparty.all, :id, :name, { prompt: true }, { class: 'w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500' } %>
+    </div>
+    <div class="field">
+      <%= form.label :lastname,"Водитель", class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.collection_select :driver_id, Driver.all, :id, :lastname, { prompt: true }, { class: 'w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500' } %>
+    </div>
+    <div class="field">
+      <%= form.label :lastname,"Грузовик", class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.collection_select :truck_id, Truck.all, :id, :car_number, { prompt: true }, { class: 'w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500' } %>
+    </div>
+    <div class="field">
+      <%= form.label :lastname,"Прицеп", class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.collection_select :trailer_id, Trailer.all, :id, :car_number, { prompt: true }, { class: 'w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500' } %>
+    </div>
+    <div class="field">
+    <%= form.label :loading,"Место загрузки", class: "block text-gray-700 text-sm font-bold mb-2"  %>
+    <%= form.text_field :loading, class: "w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500"   %>
+    </div>
+    <div class="field">
+    <%= form.label :unloading,"Место разгрузки", class: "block text-gray-700 text-sm font-bold mb-2"  %>
+    <%= form.text_field :unloading, class: "w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500"   %>
+    </div>
+    <div class="field">
+    <%= form.label :date_load,"Дата загрузки", class: "block text-gray-700 text-sm font-bold mb-2"  %>
+    <%= form.date_field :date_load, class: "w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500"  %>
+    </div>
+    <div class="field">
+    <%= form.label :date_unload,"Дата разгрузки", class: "block text-gray-700 text-sm font-bold mb-2"  %>
+    <%= form.date_field :date_unload, class: "w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500"  %>
+    </div>
+    <div class="field">
+    <%= form.label :cargo_name,"Наименование груза", class: "block text-gray-700 text-sm font-bold mb-2"  %>
+    <%= form.text_field :cargo_name, class: "w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500"   %>
+    </div>
+    <div class="field">
+    <%= form.label :km,"Километраж", class: "block text-gray-700 text-sm font-bold mb-2"  %>
+    <%= form.text_field :km, class: "w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500"   %>
+    </div>
+    <div class="field">
+    <%= form.label :rate,"Ставка за тонну груза", class: "block text-gray-700 text-sm font-bold mb-2"  %>
+    <%= form.text_field :rate, class: "w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500"   %>
+    </div>
+    <div class="field">
+    <%= form.label :tonnage,"Загруженный вес", class: "block text-gray-700 text-sm font-bold mb-2"  %>
+    <%= form.text_field :tonnage, class: "w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500"   %>
+    </div>
+    
+    <div class="field">
+    <%= form.label :nds,"НДС", class: "text-gray-700 text-sm font-bold mb-2  mr-2"  %>
+    <%= form.check_box :nds, class: "shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500"   %>
+    </div>
+    <div class="field">
+    <%= form.label :sum,"Суммарная стоимость", class: "block text-gray-700 text-sm font-bold mb-2"  %>
+    <%= form.text_field :sum, class: "w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500"   %>
+    </div>
+    <div class="field">
+    <%= form.label :due_date,"Срок оплаты", class: "block text-gray-700 text-sm font-bold mb-2"  %>
+    <%= form.date_field :due_date, class: "w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500"  %>
+    </div>
+    <div class="field">
+    <%= form.label :invoice_date,"Дата выставления счёта", class: "block text-gray-700 text-sm font-bold mb-2"  %>
+    <%= form.date_field :invoice_date, class: "w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500"  %>
+    </div>
+    <div class="field">
+    <%= form.label :letter_date,"Дата отправки письма", class: "block text-gray-700 text-sm font-bold mb-2"  %>
+    <%= form.date_field :letter_date, class: "w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500"  %>
+    </div>
+    <div class="field">
+    <%= form.label :deadline,"Крайний срок оплаты", class: "block text-gray-700 text-sm font-bold mb-2"  %>
+    <%= form.date_field :deadline, class: "w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500"  %>
+    </div>
+    <div class="field">
+    <%= form.label :status,"Статус оплаты", class: "block text-gray-700 text-sm font-bold mb-2"  %>
+    <%= form.text_field :status, class: "w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500"  %>
+    </div>
+    <div class="field">
+    <%= form.label :tracking_number,"Номер отслеживания", class: "block text-gray-700 text-sm font-bold mb-2"  %>
+    <%= form.text_field :tracking_number, class: "w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500"  %>
+    </div>
+    <div class="actions" >
+      <% if @reis_table.new_record? %>
+        <%= form.submit "Создать", class: "w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500" %>
+      <% else %>
+        <%= form.submit "Обновить информацию", class: "w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline focus:ring-green-500 focus:border-green-500" %>
+      <% end %>
+    </div>
+  <% end %>
+    </div>
+    
+  </div>
+</div>

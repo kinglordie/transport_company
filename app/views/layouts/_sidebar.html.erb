@@ -1,0 +1,36 @@
+<div x-data="{ open: false }">
+  <aside
+    :class="open ? 'w-64' : 'w-16'"
+    @mouseenter="open = true"
+    @mouseleave="open = false"
+    class="flex flex-col items-center bg-green-100 min-h-screen text-green-900 h-full transition-width duration-300 wrap-auto"
+  >
+    <div class="mt-5 min-h-[150px]">
+      <%= image_tag "logo.png" %>
+    </div>
+
+    <nav class="w-full h-full mt-0">
+      <ul class="flex-column justify-center">
+        <% links = {
+          'Профиль' => { path: profile_path, icon: 'account_circle' },
+          'Пользователи' => { path: users_path, icon: 'people' },
+          'Грузовики' => { path: trucks_path, icon: 'local_shipping' },
+          'Прицепы' => { path: trailers_path, icon: 'rv_hookup' },
+          'Водители' => { path: drivers_path, icon: 'directions_car' },
+          'Контрагенты' => { path: counterparties_path, icon: 'diversity_3' },
+          'Рейсы' => { path: reis_tables_path, icon: 'work' }
+          
+        } %>
+        <% links.each do |name, options| %>
+          <li class="">
+            <%= link_to options[:path], class: "flex text-center items-center transition p-4 duration-300 hover:bg-green-200 #{'bg-green-300 hover:bg-green-300' if current_page?(options[:path])}" do %>
+              <span class="material-icons  ml-1 "><%= options[:icon] %></span>
+              <span :class="open ? 'block' : 'hidden'" class="ml-2"><%= name %></span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
+  </aside>
+</div>
+

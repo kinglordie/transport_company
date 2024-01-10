@@ -1,0 +1,27 @@
+
+<h1>Редактирование Грузовика</h1>
+
+<%= form_with(model: @truck, local: true) do |form| %>
+  <% if @truck.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@truck.errors.count, "error") %> запрещено эту форму сохранить:</h2>
+
+      <ul>
+      <% @truck.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :car_number %>
+    <%= form.text_field :car_number %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Назад', trucks_path %>

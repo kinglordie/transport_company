@@ -1,0 +1,31 @@
+<div class="flex justify-center bg-white shadow-lg rounded-lg w-full">
+  
+  <div class="p-6">
+    <div class="flex justify-center items-center">
+    <h1 class="text-3xl font-bold text-center my-6 col-span-5 mr-4">Список контрагентов</h1>
+    <%= link_to new_counterparty_path, class: 'flex items-center justify-center h-12 w-12 bg-green-500 hover:bg-green-700 text-white rounded-full shadow-lg' do %>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+      </svg>
+    <% end %>
+    </div>
+    <div class="gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid grid-cols-1">
+    <% @counterparties.each do |counterparty| %>
+    <%= link_to counterparty_path(counterparty)  do %>
+      <div class="flex p-4 rounded-lg mb-2  shadow-md hover:bg-green-200">
+        <div class="w-full flex flex-col">
+        <div class="font-bold">Название: <%= counterparty.name %></div>
+        <div>Контактный номер: <%= counterparty.contact %></div>
+        <div>ИНН: <%= counterparty.INN %></div>
+        <div>Email: <%= counterparty.email %></div>
+        <div>Почтовый адрес: <%= counterparty.post %></div>
+        <div>Статус: <%= counterparty.status %></div>
+        </div>
+      </div>
+    <% end %>  
+    <% end %>
+    </div>
+  </div>
+</div>
+
+
